@@ -8,7 +8,7 @@ from cryptography.fernet import Fernet
 
 Csocket = socket.socket()
 host = '192.168.56.101'
-port = 8080
+port = 9999
 
 # anywhere safe // key generation
 key = Fernet.generate_key()
@@ -21,7 +21,7 @@ try:
 	Csocket.connect((host, port))
 	# receive text up to 2048 bytes
 	tinker = Csocket.recv(2048)
-	print (word)
+	print (tinker)
 
 # catcing exception/error
 except socket.error as err:
@@ -34,8 +34,8 @@ except socket.error as err:
 
 # choose your menu
 		choice = input ("""
-					A: upload file <filename>/n
-					B: download file <filename>/n
+					A: upload file
+					B: download file
 					C: quit\n
 
 					enter your choice: """)
