@@ -1,15 +1,15 @@
 import socket
 import os
-
+import errno
 #identifier of current thread
-from _thread import*
+from _thread import *
 
 #encrypting
 from cryptography.fernet import Fernet
 
-SSocket = socket.socket()
+SSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host = ''
-port = 8080
+port = 9999
 ThreadCount = 0
 #key generating
 key = Fernet.generate_key()
@@ -17,9 +17,12 @@ with open('filekey.key', 'wb') as filekey:
 	filekey.write(key)
 try:
 	#socket class assigns an IP address and a port number
-	SSocket.bind((host, port))
+	SSocket.bind(('', port))
+
 #traps the error
 except socket.error as err:
+	#print ("bind failed. error code :"  + str(err[0]) + 'message' + err[1])
+	#sys.exit()
 	print (str(err))
 print ("Connection ...\n")
 #Listen for connections made to the socket
